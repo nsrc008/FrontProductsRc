@@ -125,9 +125,9 @@ Este archivo orquesta tanto el frontend como el backend, asegurando que ambos se
 
 Puedes utilizar los siguientes comandos para desarrollar o construir la aplicación fuera de Docker:
 
-`npm run dev`: Ejecuta la aplicación en modo desarrollo.
-`npm run build`: Construye la aplicación optimizada para producción.
-`npm run start`: Sirve la aplicación construida.
+* `npm run dev`: Ejecuta la aplicación en modo desarrollo.
+* `npm run build`: Construye la aplicación optimizada para producción.
+* `npm run start`: Sirve la aplicación construida.
 
 ## Dependencias
 
