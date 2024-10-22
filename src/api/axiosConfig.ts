@@ -1,9 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/', // Cambia esto a tu URL de la API
+  baseURL: "https://backproductsdj.onrender.com/api/", // Cambia esto a tu URL de la API
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
