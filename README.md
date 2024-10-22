@@ -54,30 +54,72 @@ Para generar los archivos estáticos de producción, ejecuta:
 
 Los archivos generados se almacenarán en la carpeta dist/, listos para ser desplegados en un servidor.
 
-## Uso de Docker Compose
+## Docker Compose
+## Estructura del Proyecto
+A continuación, se muestra la estructura de directorios del proyecto:
 
-Si prefieres usar Docker Compose para ejecutar la aplicación, sigue estos pasos:
+```
+/proyecto
+│
+├── FrontProductsRc/            # Repositorio del frontend
+│   ├── Dockerfile
+│   └── ... (otros archivos del frontend)
+│
+├── BackProductsDj/             # Repositorio del backend
+│   ├── Dockerfile
+│   └── ... (otros archivos del backend)
+│
+└── docker-compose.yml          # Archivo para orquestar los servicios
+```
 
-### 1. Crear el archivo docker-compose.yml
+## Instrucciones de Uso
+1. Clonar los Repositorios: Clona ambos repositorios (frontend y backend) en el mismo directorio donde se encuentra el archivo ```docker-compose.yml```.
+2. Construir y Ejecutar los Servicios:
+   * Abre una terminal y navega hasta el directorio que contiene ```docker-compose.yml```.
+   * Ejecuta el siguiente comando para construir y levantar los contenedores:
+     ```
+      docker-compose up --build
+     ```
+3. Acceso a la Aplicación:
+   * El frontend estará disponible en ```http://localhost:3000 ```
+   * El backend estará disponible en ```http://localhost:8000```
 
-Asegúrate de que el archivo docker-compose.yml está presente en el proyecto.
+## Descripción del Archivo docker-compose.yml
+```
+version: '3.8'
 
-### 2. Levantar los contenedores
+services:
+  frontend:
+    build:
+      context: ./FrontProductsRc
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    depends_on:
+      - backend
 
-Para construir la imagen y levantar los contenedores, simplemente usa el siguiente comando:
-`docker-compose up --build`
+  backend:
+    build:
+      context: ./BackProductsDj
+    ports:
+      - "8000:8000"
+    networks:
+      - app-network
+    volumes:
+      - backend_data:/app 
+    environment:
+      - DJANGO_SETTINGS_MODULE=ProyectApi.settings
+      - PYTHONUNBUFFERED=1
 
-Esto descargará las dependencias, construirá la aplicación y expondrá el servicio en `http://localhost:3000/`
+networks:
+  app-network:
+    driver: bridge
 
-### 3. Detener los contenedores
-
-Para detener los contenedores, utiliza:
-`docker-compose down`
-
-### 4. Volver a ejecutar sin reconstruir
-
-Si ya construiste los contenedores previamente, puedes levantarlos de nuevo sin reconstruir la imagen:
-`docker-compose up`
+volumes:
+  backend_data:
+```
+Este archivo orquesta tanto el frontend como el backend, asegurando que ambos servicios estén disponibles y funcionando correctamente.
 
 ## Scripts de NPM
 
@@ -98,16 +140,6 @@ El proyecto utiliza las siguientes dependencias clave:
 - Bootstrap 5.3.3
 
 Las dependencias de desarrollo incluyen ESLint y Vite para facilitar el desarrollo y la construcción.
-
-## Dockerfile
-
-El proyecto incluye un Dockerfile que define el proceso de construcción para un entorno Dockerizado. A continuación, se muestra un resumen del proceso:
-
-1. Se utiliza una imagen base de Node.js.
-2. Se copian los archivos del proyecto al contenedor.
-3. Se instalan las dependencias.
-4. Se ejecuta el comando de build para producción.
-5. Se expone el puerto 3000 para servir la aplicación.
 
 ## Estilo y Linting
 
