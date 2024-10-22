@@ -14,7 +14,7 @@ Clona este repositorio en tu máquina local usando git:
 
 bash
 Copiar código
-git clone https://github.com/usuario/nombre-del-proyecto.git
+git clone https://github.com/nsrc008/FrontProductsRc.git
 cd nombre-del-proyecto
 ### 2. Instalar dependencias
 Una vez en la carpeta del proyecto, instala las dependencias del proyecto ejecutando:
