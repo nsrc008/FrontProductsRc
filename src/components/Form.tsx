@@ -8,7 +8,7 @@ interface FormProps {
 
 function Form({ inputValue, onInputChange, onSubmit }: FormProps) {
   return (
-    <form className="row g-3">
+    <form className="row g-3 w-100 w-md-auto">
       <div className="col-auto">
         <label className="visually-hidden">Email</label>
       </div>
